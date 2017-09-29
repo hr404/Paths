@@ -1,8 +1,9 @@
 <html>
 <head>
   <title>A Leaflet map!</title>
-  <link rel="stylesheet" href="./Leaflet-1.0.3/leaflet.css"/>
-  <script src="./Leaflet-1.0.3/leaflet.js"></script>
+  <link rel="stylesheet" href="./Leaflet/leaflet.css"/>
+  <script src="./Leaflet/leaflet.js"></script>
+  <script src="./jquery/jquery.js"></script>
   <style>
     #map{ height: 100% }
   </style>
@@ -14,16 +15,25 @@
   <script>
 
   // initialize the map
-  var map = L.map('map').setView([42.35, -71.08], 13);
+  var map = L.map('map').setView([36.75, -76.28], 12);
 
   // load a tile layer
-  L.tileLayer('http://tiles.mapc.org/basemap/{z}/{x}/{y}.png',
+  L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHI0MDQiLCJhIjoidGZVdG4tbyJ9.uGErGx6gjEoYKMILwNiXig',
     {
-      attribution: 'Tiles by <a href="http://mapc.org">MAPC</a>, Data by <a href="http://mass.gov/mgis">MassGIS</a>',
+      //attribution: 'Tiles by <a href="http://mapc.org">MAPC</a>, Data by <a href="http://mass.gov/mgis">MassGIS</a>',
       maxZoom: 17,
       minZoom: 9
     }).addTo(map);
-
+  //load ride layer
+  // load GeoJSON from an external file
+  $.getJSON("http://localhost/paths/rides/ride.geojson",function(data){
+    // add GeoJSON layer to the map once the file is loaded
+    L.geoJson(data).addTo(map);
+  });
+    $.getJSON("http://localhost/paths/rides/ride20170917.geojson",function(data){
+    // add GeoJSON layer to the map once the file is loaded
+    L.geoJson(data).addTo(map);
+  });
   </script>
 </body>
 </html>
