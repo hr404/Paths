@@ -1,0 +1,1 @@
+ Places I've __remembered__ to run GPS on fitbit
